@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\OrderListController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,14 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/order-list-1', function () {
-    return view('order-list.order-list-產品列表頁');
-});
+Route::get('/order-list-1', [OrderListController::class,'orderList']);
 
-Route::get('/order-list-2', function () {
-    return view('order-list.order-list-產品新增頁');
-});
+Route::get('/order-list-2', [OrderListController::class,'orderList2']);
 
-Route::get('/order-list-3', function () {
-    return view('order-list.order-list-產品編輯頁');
-});
+Route::get('/order-list-3', [OrderListController::class,'orderList3']);
