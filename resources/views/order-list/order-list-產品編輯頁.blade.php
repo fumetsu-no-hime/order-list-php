@@ -379,10 +379,10 @@
                                 <span class="bg-primary-subtle px-3 py-2">產品價格</span>
                                 <input type="number">
                             </div>
-                            <div class="d-flex gap-5">
-                                <span class="bg-primary-subtle px-3 py-2">產品狀態</span>
-                                <input type="radio">
-                                <input type="radio" hidden>
+                            <div class="d-flex gap-5 align-items-center">
+                                <span class="bg-primary-subtle px-3 py-2">顯示狀態</span>
+                                <div>顯示&nbsp;<input type="radio"></div>
+                                <div>不顯示&nbsp;<input type="radio"></div>
                             </div>
                             <div class="d-flex gap-5">
                                 <span class="bg-primary-subtle px-3 py-2">產品描述</span>
@@ -391,7 +391,7 @@
                         </div>
                         <div class="bottom btn-group mt-4 d-flex justify-content-evenly">
                             <button type="button" class="btn-lg bg-primary-subtle py-2 px-3">取消按鈕</button>
-                            <button type="button" class="btn-lg bg-primary-subtle py-2 px-3">儲存按鈕</button>
+                            <a href="/order-list-1" class="btn-lg bg-primary-subtle py-2 px-3"><div>儲存按鈕</div></a>
                         </div>
                     </div>
                 </div>

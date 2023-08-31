@@ -371,7 +371,7 @@
                             <form class="d-flex position-relative">
                                 <input class="form-control rounded-0 py-0 w-100" id="search-area" type="search"
                                     placeholder="Search" aria-label="Search">
-                                <button type="button" class="ms-2 bg-primary-subtle w-50"><a href="/order-list-2">新增產品</a></button>
+                                <a href="/order-list-2" class="mx-2 bg-primary-subtle w-50 d-flex align-items-center justify-content-center">新增產品</a>
                             </form>
                             <div class="form-floating pt-3 pt-md-0">
                                 <select class="form-select py-0 ps-3 w-100" id="floatingSelect"
@@ -425,10 +425,9 @@
                                         <th>$12.99</th>
                                         <th>
                                             <ul class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100">
-                                                <button type="button" class="bg-primary-subtle mb-1 btn"><a
-                                                        href="#">Delete</a></button>
-                                                <button type="button" class="bg-primary-subtle btn btn"><a
-                                                        href="/order-list-3">Edit</a></button>
+                                                <div class="bg-primary-subtle mb-1 btn"><a
+                                                        href="#">Delete</a></div>
+                                                <a href="/order-list-3" class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                             </ul>
                                         </th>
                                     </tr>
@@ -452,8 +451,7 @@
                                             <ul class="p-0 m-0 d-flex flex-column btn-group-sm w-100">
                                                 <button type="button" class="bg-primary-subtle btn mb-1"><a
                                                         href="#">Delete</a></button>
-                                                <button type="button" class="bg-primary-subtle btn"><a
-                                                        href="/order-list-3">Edit</a></button>
+                                                <a href="/order-list-3" class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                             </ul>
                                         </th>
                                     </tr>
@@ -477,8 +475,7 @@
                                             <ul class="p-0 m-0 d-flex flex-column btn-group-sm w-100">
                                                 <button type="button" class="bg-primary-subtle btn mb-1"><a
                                                         href="#">Delete</a></button>
-                                                <button type="button" class="bg-primary-subtle btn"><a
-                                                        href="/order-list-3">Edit</a></button>
+                                                <a href="/order-list-3" class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                             </ul>
                                         </th>
                                     </tr>
@@ -502,8 +499,7 @@
                                             <ul class="p-0 m-0 d-flex flex-column btn-group-sm w-100">
                                                 <button type="button" class="bg-primary-subtle btn mb-1"><a
                                                         href="#">Delete</a></button>
-                                                <button type="button" class="bg-primary-subtle btn"><a
-                                                        href="/order-list-3">Edit</a></button>
+                                                <a href="/order-list-3" class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                             </ul>
                                         </th>
                                     </tr>
@@ -527,8 +523,7 @@
                                             <ul class="p-0 m-0 d-flex flex-column btn-group-sm w-100">
                                                 <button type="button" class="bg-primary-subtle btn mb-1"><a
                                                         href="#">Delete</a></button>
-                                                <button type="button" class="bg-primary-subtle btn"><a
-                                                        href="/order-list-3">Edit</a></button>
+                                                <a href="/order-list-3" class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                             </ul>
                                         </th>
                                     </tr>
@@ -552,8 +547,7 @@
                                             <ul class="p-0 m-0 d-flex flex-column btn-group-sm w-100">
                                                 <button type="button" class="bg-primary-subtle btn mb-1"><a
                                                         href="#">Delete</a></button>
-                                                <button type="button" class="bg-primary-subtle btn"><a
-                                                        href="/order-list-3">Edit</a></button>
+                                                <a href="/order-list-3" class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                             </ul>
                                         </th>
                                     </tr>
@@ -577,8 +571,7 @@
                                             <ul class="p-0 m-0 d-flex flex-column btn-group-sm w-100 ">
                                                 <button type="button" class="bg-primary-subtle btn mb-1"><a
                                                         href="#">Delete</a></button>
-                                                <button type="button" class="bg-primary-subtle btn"><a
-                                                        href="/order-list-3">Edit</a></button>
+                                                <a href="/order-list-3" class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                             </ul>
                                         </th>
                                     </tr>

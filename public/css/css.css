@@ -331,6 +331,12 @@ button:hover {
     border-radius: 10px;
 }
 
+a:hover {
+    background-color: #f0f3f2;
+    color: #21313c;
+    border-radius: 10px;
+}
+
 button img {
     transition: 400ms;
 }
