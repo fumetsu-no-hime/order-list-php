@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderListController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/order-list-1', [OrderListController::class,'orderList']);
+Route::get('/order-list', [ProductController::class,'index'])->name('product.index');
 
-Route::get('/order-list-2', [OrderListController::class,'orderList2']);
+Route::get('/order-list-add', [ProductController::class,'create'])->name('product.create');
+Route::post('/store', [ProductController::class,'store'])->name('product.store');
 
-Route::get('/order-list-3', [OrderListController::class,'orderList3']);
+Route::get('/order-list-edit/{id}', [ProductController::class,'edit'])->name('product.edit');
+Route::post('/update/{id}', [ProductController::class,'update'])->name('product.update');
+
+
