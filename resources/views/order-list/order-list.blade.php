@@ -445,7 +445,12 @@
                                             <th>
                                                 <ul
                                                     class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100">
-                                                    <div class="bg-primary-subtle mb-1 btn"><button type="submit">Delete</button></div>
+                                                    <form
+                                                        action="{{ route('product.delete', ['id' => $product->id]) }}"
+                                                        method="post" class="bg-primary-subtle mb-1 btn">
+                                                        @csrf
+                                                        <button type="submit">Delete</button>
+                                                    </form>
                                                     <a href="{{ route('product.edit', ['id' => $product->id]) }}"
                                                         class="bg-primary-subtle btn btn"><span>Edit</span></a>
                                                 </ul>

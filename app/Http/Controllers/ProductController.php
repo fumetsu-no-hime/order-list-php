@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Service\FileService;
+use App\Services\FileService;
 
 class ProductController extends Controller
 {
-    protected $FileService;
+    // protected $FileService;
 
+    // public function _construct(FileService $FileService)
+    // {
+    //     $this->FileService = $FileService;
+    // }
 
+    public function __construct(protected FileService $FileService)
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -40,12 +48,14 @@ class ProductController extends Controller
     {
         //新產品資料儲存功能
         // dd($request->all());
-        $path = Storage::putFile('public', $request->file('image'));
-
-
+        //方法一 使用storage
+        // $path = Storage::putFile('public', $request->file('image'));
+        //方法二 使用fileservice
+        $path = $this->FileService->imgUpload($request->file('image'), 'product-image');
         Product::create([
             'name' => $request->name,
-            'img_path' => str_replace('public', 'storage', $path),
+            //'img_path' => str_replace('public', 'storage', $path),
+            'img_path' => $path,
             'price' => $request->price,
             'status' => $request->status,
             'desc' => $request->desc,
@@ -82,18 +92,37 @@ class ProductController extends Controller
         // dd($request->all());
         $product = Product::find($id);
 
-        if ($request->file('image')) {
-            $path = Storage::putFile('public', $request->file('image'));
-            Storage::delete(str_replace('storage', 'public', $product->img_path));
+        // if ($request->file('image')) {
+        //     $path = Storage::putFile('public', $request->file('image'));
+        //     Storage::delete(str_replace('storage', 'public', $product->img_path));
 
+        //     $product->update([
+        //         'name' => $request->name,
+        //         'price' => $request->price,
+        //         'status' => $request->status,
+        //         'desc' => $request->desc,
+        //         'img_path' => str_replace('public', 'storage', $path),
+        //     ]);
+        // } else {
+        //     $product->update([
+        //         'name' => $request->name,
+        //         'price' => $request->price,
+        //         'status' => $request->status,
+        //         'desc' => $request->desc,
+        //     ]);
+        // }
+
+        if ($request->file('image')) {
+            $path = $this->FileService->imgUpload($request->file('image'), 'product-image');
+            $this->FileService->deleteUpload($product->img_path);
             $product->update([
-                'name' => $request->name,
-                'price' => $request->price,
-                'status' => $request->status,
-                'desc' => $request->desc,
-                'img_path' => str_replace('public', 'storage', $path),
-            ]);
-        } else {
+                        'name' => $request->name,
+                        'price' => $request->price,
+                        'status' => $request->status,
+                        'desc' => $request->desc,
+                        'img_path' => $path,
+                    ]);
+        }else{
             $product->update([
                 'name' => $request->name,
                 'price' => $request->price,
@@ -101,8 +130,6 @@ class ProductController extends Controller
                 'desc' => $request->desc,
             ]);
         }
-
-
         return redirect(route('product.index'));
     }
 
@@ -112,6 +139,10 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
+        $this->FileService->deleteUpload($product->img_path);
+        $product -> delete();
+        return redirect(route('product.index'));
         //刪除資料功能
+        // dd($id);
     }
 }
