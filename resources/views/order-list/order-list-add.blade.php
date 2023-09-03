@@ -405,7 +405,7 @@
                                 </div>
                             </div>
                             <div class="bottom btn-group mt-4 d-flex justify-content-evenly">
-                                <button type="button" class="btn-lg bg-primary-subtle py-2 px-3">取消按鈕</button>
+                                <a href="{{route('product.index')}}"><button type="button" class="btn-lg bg-primary-subtle py-2 px-3">取消按鈕</button></a>
                                 <button type="submit" class="btn-lg bg-primary-subtle py-2 px-3">新增按鈕</button>
                             </div>
                         </form>

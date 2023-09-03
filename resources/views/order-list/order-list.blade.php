@@ -449,7 +449,7 @@
                                                         action="{{ route('product.delete', ['id' => $product->id]) }}"
                                                         method="post" class="bg-primary-subtle mb-1 btn">
                                                         @csrf
-                                                        <button type="submit">Delete</button>
+                                                        <button type="submit" class="del-btn">Delete</button>
                                                     </form>
                                                     <a href="{{ route('product.edit', ['id' => $product->id]) }}"
                                                         class="bg-primary-subtle btn btn"><span>Edit</span></a>
