@@ -13,7 +13,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-//     
+//     rpp
 
 Route::get('/', [ProductController::class,'index'])->name('product.index');
 
