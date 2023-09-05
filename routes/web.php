@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -29,6 +30,9 @@ Route::post('/delete/{id}', [ProductController::class,'destroy'])->name('product
 
 
 Route::resource('/type', TypeController::class);
+
+Route::resource('/', ChatController::class);
+
 
 
 

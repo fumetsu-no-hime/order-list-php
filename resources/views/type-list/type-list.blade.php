@@ -1,11 +1,14 @@
 @extends('layout.template')
+
 @section('content-page')
     <div class="content-page py-4 px-lg-0 px-xl-5 mx-md-5 d-flex flex-column">
         <div class="content-title d-flex justify-content-between align-items-center flex-column px-xxl-5 px-xl-0">
             <div class="title mb-4 px-2 w-100">
                 <h2 class="fw-medium w-50">Order List</h2>
-                <h6><span class="text-Dashboard">Dashboard</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbspOrder
-                    List</h6>
+                <h6><span class="text-Dashboard">Dashboard</span>
+                    &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;
+                    OrderList
+                </h6>
             </div>
             <div class="order w-100 mb-5 px-2 ">
                 <div class="card p-0 border-0 o-card">
@@ -37,8 +40,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="checkAll"
                                                 onchange="checkedAll(this)">
-                                            <label class="form-check-label" for="checkAll">
-                                            </label>
+                                            <label class="form-check-label" for="checkAll"></label>
                                         </div>
                                     </th>
                                     <th>Image</th>
@@ -57,8 +59,7 @@
                                             <div class="form-check pt-2">
                                                 <input class="form-check-input checkbox" type="checkbox" value=""
                                                     id="check1">
-                                                <label class="form-check-label" for="check1">
-                                                </label>
+                                                <label class="form-check-label" for="check1"></label>
                                             </div>
                                         </th>
                                         <th>
@@ -81,7 +82,8 @@
                                         <th>
                                             <ul
                                                 class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100">
-                                                <form action="{{ route('type.destroy', ['type' => $type->id]) }}"
+                                                <form class="myform"
+                                                    action="{{ route('type.destroy', ['type' => $type->id]) }}"
                                                     data-name="{{ $type->name }}" method="post"
                                                     class="bg-primary-subtle mb-1 btn">
                                                     @csrf
@@ -89,7 +91,9 @@
                                                     <button type="submit" class="del-btn">Delete</button>
                                                 </form>
                                                 <a href="{{ route('type.edit', ['type' => $type->id]) }}"
-                                                    class="bg-primary-subtle btn btn"><span>Edit</span></a>
+                                                    class="bg-primary-subtle btn btn">
+                                                    <span>Edit</span>
+                                                </a>
                                             </ul>
                                         </th>
                                     </tr>
@@ -120,17 +124,15 @@
         </div>
     </div>
 @endsection
+
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const formData = document.querySelectorAll('th ul form');
-        console.log(formData);
-        formData.forEach(element => {
-            console.log(element);
+        const test = document.querySelectorAll('.myform');
+        console.log(test);
+        test.forEach(element => {
             element.addEventListener('submit', (event) => {
-                console.log(event);
                 event.preventDefault();
-                console.log(123);
                 Swal.fire({
                     title: `確定要刪除${element.dataset.name}嗎?`,
                     showDenyButton: true,
@@ -146,4 +148,27 @@
                 })
             })
         });
+        // setTimeout(() => {
+        //     const test = document.querySelectorAll('.myform');
+        //     test.forEach(element => {
+        //         element.addEventListener('submit', (event) => {
+        //             event.preventDefault();
+        //             Swal.fire({
+        //                 title: `確定要刪除${element.dataset.name}嗎?`,
+        //                 showDenyButton: true,
+        //                 confirmButtonText: '取消',
+        //                 denyButtonText: `刪除`,
+        //             }).then((result) => {
+        //                 /* Read more about isConfirmed, isDenied below */
+        //                 if (result.isConfirmed) {
+
+        //                 } else if (result.isDenied) {
+        //                     element.submit();
+        //                 }
+        //             })
+        //         })
+        //     });
+        // }, 100);
     </script>
+@endsection
+
