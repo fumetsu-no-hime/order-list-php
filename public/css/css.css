@@ -171,6 +171,10 @@ button {
     --bs-table-hover-bg: #F0F3F2 !important;
 }
 
+tr {
+    width: 100%!important;
+}
+
 .th1 th {
     line-height: 25px;
     background-color: #F0F3F2;
