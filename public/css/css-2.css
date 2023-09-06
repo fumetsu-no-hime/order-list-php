@@ -14,17 +14,17 @@ a {
     color: #728088;
 }
 
-.chat{
-    border: 1px solid;
-    width: 70%;
-    height: 50px;
-}
+/* .chat{
+    /* border: 1px solid; */
+    /* width: 70%; */
+    /* height: 50px; */
+/* } */
 
-.resp{
-    border: 1px solid;
-    width: 70%;
-    height: 50px;
-}
+/* .resp{ */
+    /* border: 1px solid; */
+    /* width: 70%; */
+    /* height: 50px; */
+/* } */
 
 .content{
     display: flex;

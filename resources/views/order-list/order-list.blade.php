@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="{{ asset('./css/bootstrap.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .pagination{
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -379,9 +384,10 @@
                     <div class="card p-0 border-0 o-card">
                         <div
                             class="card-header bg-white d-flex justify-content-between flex-column flex-md-row order-search py-4">
-                            <form class="d-flex position-relative">
-                                <input class="form-control rounded-0 py-0 w-100" id="search-area" type="search"
-                                    placeholder="Search" aria-label="Search">
+                            <form action="{{route('product.index')}}" class="d-flex position-relative" method="GET">
+                                <input class="form-control rounded-0 py-0 w-100" name="keyword" id="search-area" type="search"
+                                    placeholder="搜尋名稱或描述" aria-label="Search" value="{{$keyword}}">
+                                    <button type="submit" class="btn btn-primary w-25">搜尋</button>
                                 <a href="{{ route('product.create') }}"
                                     class="mx-2 bg-primary-subtle w-50 d-flex align-items-center justify-content-center">新增產品</a>
                             </form>
@@ -457,12 +463,11 @@
                                             </th>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
-                        <div
-                            class="card-footer order-page bg-white px-3 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
+                        {{ $products->links() }}
+                        {{-- <div class="card-footer order-page bg-white px-3 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
                             <div>Showing 1 to 8 of 12 entries</div>
                             <div aria-label="Page navigation">
                                 <ul class="pagination justify-content-end mt-3" id="page-item">
@@ -477,7 +482,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

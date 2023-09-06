@@ -23,11 +23,22 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::get();
+        // dd($request->all());
+        $products = Product::query();
+        $keyword = $request->keyword ??'';
+        if ($request->filled('keyword')) {
+            $products = Product::where('name','like','%' .$keyword.'%')->orWhere('desc','like','%' . $keyword.'%');
+        }
+
+        $products = $products->paginate(5);
+        // $products->withPath('/order-list?keyword=',$keyword);
+        $products->appends(['keyword'=>$keyword]);
+
+        // $searchs = Product::table('products')->where('name', $products->name)->first();
         //產品列表頁
-        return view('order-list.order-list', ['products' => $products]);
+        return view('order-list.order-list', ['products' => $products, 'keyword'=>$keyword]);
     }
 
     /**
@@ -117,13 +128,13 @@ class ProductController extends Controller
             $path = $this->FileService->imgUpload($request->file('image'), 'product-image');
             $this->FileService->deleteUpload($product->img_path);
             $product->update([
-                        'name' => $request->name,
-                        'price' => $request->price,
-                        'status' => $request->status,
-                        'desc' => $request->desc,
-                        'img_path' => $path,
-                    ]);
-        }else{
+                'name' => $request->name,
+                'price' => $request->price,
+                'status' => $request->status,
+                'desc' => $request->desc,
+                'img_path' => $path,
+            ]);
+        } else {
             $product->update([
                 'name' => $request->name,
                 'price' => $request->price,
@@ -141,7 +152,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $this->FileService->deleteUpload($product->img_path);
-        $product -> delete();
+        $product->delete();
         return redirect(route('product.index'));
         //刪除資料功能
         // dd($id);

@@ -14,9 +14,9 @@
                 <div class="card p-0 border-0 o-card">
                     <div
                         class="card-header bg-white d-flex justify-content-between flex-column flex-md-row order-search py-4">
-                        <form class="d-flex position-relative">
-                            <input class="form-control rounded-0 py-0 w-100" id="search-area" type="search"
-                                placeholder="Search" aria-label="Search">
+                        <form action="{{route('product.index')}}" class="d-flex position-relative" method="GET">
+                            <input class="form-control rounded-0 py-0 w-100" name="keyword" id="search-area" type="search"
+                                placeholder="搜尋名稱或描述" aria-label="Search">
                             <a href="{{ route('type.create') }}"
                                 class="mx-2 bg-primary-subtle w-50 d-flex align-items-center justify-content-center">新增產品</a>
                         </form>
@@ -140,14 +140,31 @@
                     denyButtonText: `刪除`,
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-
-                    } else if (result.isDenied) {
+                    if (result.isDenied) {
                         element.submit();
                     }
                 })
             })
         });
+
+        //寫法二
+        function deleteData(id) {
+            console.log(id);
+            const formData = new formData();
+            formData.append('_token', '{{ csrf_token() }}')
+            formData.append('_method', 'delete');
+            fetch(`/type/${id}` {
+                methods: 'post',
+                body: formData,
+            }).then((res) => {
+                return res.text();
+            }).then((data) => {
+                if (data == 'success') {
+                    const tr = document.querySelector(`tr#dataCol${id}`);
+                    tr.remove();
+                }
+            })
+        }
         // setTimeout(() => {
         //     const test = document.querySelectorAll('.myform');
         //     test.forEach(element => {
@@ -171,4 +188,3 @@
         // }, 100);
     </script>
 @endsection
-

@@ -2,25 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Content;
-use App\Models\Response;
-use App\Services\FileService;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ChatController extends Controller
+class FrontController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function __construct(protected FileService $FileService)
-    {
-    }
     public function index()
     {
         //
-        $chats = Content::get();
-        $resps = Response::get();
-        return view('chat.chat', compact('chats', 'resps'));
+        $products = Product::where('status',1)->get();
+        return view ('welcome',compact('products'));
     }
 
     /**
@@ -29,7 +23,6 @@ class ChatController extends Controller
     public function create()
     {
         //
-
     }
 
     /**
@@ -38,25 +31,6 @@ class ChatController extends Controller
     public function store(Request $request)
     {
         //
-        if ($request->resp) {
-
-            Response::create([
-                'response' => $request->resp,
-                'response_id' => null,
-            ]);
-        } else {
-
-        }
-
-        if ($request->mainchat) {
-            $chat = Content::create([
-                'content' => $request->mainchat,
-            ]);
-        } else {
-        }
-
-        // dd($request->all());
-        return redirect(route('com.index'));
     }
 
     /**

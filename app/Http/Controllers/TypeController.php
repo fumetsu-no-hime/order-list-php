@@ -107,7 +107,6 @@ class TypeController extends Controller
     public function destroy(string $id)
     {
         //
-        dd(123);
         $type = ProductType::find($id);
         foreach ($type->productTypeImg ??[]as $value) {
             $this->FileService->deleteUpload($value->img_path);

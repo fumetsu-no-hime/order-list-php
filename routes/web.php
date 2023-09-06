@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 /*
@@ -16,10 +17,7 @@ use App\Http\Controllers\ProductController;
 */
 
 //
-Route::get('/', function () {
-    return view('welcome');
-
-});
+Route::get('/', [FrontController::class,'index']);
 
 Route::get('/order-list', [ProductController::class,'index'])->name('product.index');
 Route::get('/order-list-add', [ProductController::class,'create'])->name('product.create');
@@ -31,7 +29,7 @@ Route::post('/delete/{id}', [ProductController::class,'destroy'])->name('product
 
 Route::resource('/type', TypeController::class);
 
-Route::resource('/', ChatController::class);
+Route::resource('/com', ChatController::class);
 
 
 
