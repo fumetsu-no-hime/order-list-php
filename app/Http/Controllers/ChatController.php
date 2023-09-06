@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FileService;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -9,9 +10,13 @@ class ChatController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(protected FileService $FileService)
+    {
+    }
     public function index()
     {
         //
+        
         return view('chat.chat');
     }
 
