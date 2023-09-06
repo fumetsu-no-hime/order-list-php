@@ -54,7 +54,8 @@ class ProductController extends Controller
         $path = $this->FileService->imgUpload($request->file('image'), 'product-image');
         Product::create([
             'name' => $request->name,
-            //'img_path' => str_replace('public', 'storage', $path),
+            // 'img_path'=>$request->img_path,
+            // 'img_path' => str_replace('public', 'storage', $path),
             'img_path' => $path,
             'price' => $request->price,
             'status' => $request->status,
