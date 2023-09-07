@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,23 +32,29 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/front', [FrontController::class,'index']);
+Route::get('/front', [FrontController::class, 'index']);
 
-Route::get('/order-list', [ProductController::class,'index'])->name('product.index');
-Route::get('/order-list-add', [ProductController::class,'create'])->name('product.create');
-Route::post('/store', [ProductController::class,'store'])->name('product.store');
-Route::get('/order-list-edit/{id}', [ProductController::class,'edit'])->name('product.edit');
-Route::post('/update/{id}', [ProductController::class,'update'])->name('product.update');
-Route::post('/delete/{id}', [ProductController::class,'destroy'])->name('product.delete');
+Route::middleware('auth')->prefix('/product')->group(function () {
+    Route::get('/order-list', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/order-list-add', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/order-list-edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::post('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+});
+
 
 Route::resource('/type', TypeController::class);
 
 // Route::resource('/com', ChatController::class);
-Route::get('/com-index', [ChatController::class,'index'])->name('com.index');
-Route::get('/create', [ChatController::class,'create'])->name('com.create');
-Route::post('/store', [ChatController::class,'store'])->name('com.store');
-Route::get('/edit/{id}', [ChatController::class,'edit'])->name('com.edit');
-Route::post('/update/{id}', [ChatController::class,'update'])->name('com.update');
-Route::post('/delete/{id}', [ChatController::class,'destroy'])->name('com.delete');
+Route::middleware('auth')->prefix('/com')->group(function () {
+    Route::get('/index', [ChatController::class, 'index'])->name('com.index');
+Route::get('/create', [ChatController::class, 'create'])->name('com.create');
+Route::post('/store', [ChatController::class, 'store'])->name('com.store');
+Route::get('/edit/{id}', [ChatController::class, 'edit'])->name('com.edit');
+Route::post('/update/{id}', [ChatController::class, 'update'])->name('com.update');
+Route::post('/delete/{id}', [ChatController::class, 'destroy'])->name('com.delete');
+});
+
