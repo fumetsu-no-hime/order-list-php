@@ -3,8 +3,10 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +17,6 @@ use App\Http\Controllers\ProductController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-//
 Route::get('/', [FrontController::class,'index']);
 
 Route::get('/order-list', [ProductController::class,'index'])->name('product.index');
@@ -30,7 +30,11 @@ Route::post('/delete/{id}', [ProductController::class,'destroy'])->name('product
 Route::resource('/type', TypeController::class);
 
 Route::resource('/com', ChatController::class);
-
-
+Route::get('/order-list', [ChatController::class,'index'])->name('product.index');
+Route::get('/order-list-add', [ChatController::class,'create'])->name('product.create');
+Route::post('/store', [ChatController::class,'store'])->name('product.store');
+Route::get('/order-list-edit/{id}', [ChatController::class,'edit'])->name('product.edit');
+Route::post('/update/{id}', [ChatController::class,'update'])->name('product.update');
+Route::post('/delete/{id}', [ChatController::class,'destroy'])->name('product.delete');
 
 
