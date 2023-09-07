@@ -38,8 +38,6 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         //
-
-
         $type = ProductType::create([
             'name' => $request->name,
             'desc' => $request->desc,

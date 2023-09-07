@@ -15,6 +15,6 @@ class Response extends Model
     {
         //hasOne (關聯，對方的欄位，自己的欄位)
         //hasMany (關聯，對方的欄位，自己的欄位)
-        return $this->hasOne(Content::class,'id','response_id');
+        return $this->hasOne(Response::class,'id','response_id');
     }
 }

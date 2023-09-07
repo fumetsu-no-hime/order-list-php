@@ -19,17 +19,25 @@ class ChatController extends Controller
     {
         //
         $chats = Content::get();
-        $resps = Response::get();
-        return view('chat.chat', compact('chats', 'resps'));
+        // dd($chats);
+        return view('chat.chat', compact('chats'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        Response::create([
+            'response' => $request->resp,
+            'response_id' => $request->id,
+        ]);
 
+        // dd($request->$chat);
+
+        return redirect(route('com.index'));
     }
 
     /**
@@ -37,23 +45,9 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        if ($request->resp) {
-
-            Response::create([
-                'response' => $request->resp,
-                'response_id' => null,
-            ]);
-        } else {
-
-        }
-
-        if ($request->mainchat) {
-            $chat = Content::create([
-                'content' => $request->mainchat,
-            ]);
-        } else {
-        }
+        Content::create([
+            'content' => $request->mainchat,
+        ]);
 
         // dd($request->all());
         return redirect(route('com.index'));
@@ -81,6 +75,11 @@ class ChatController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $mess = Content::find($id);
+        $mess->update([
+            'content' => $request->edit,
+        ]);
+        return redirect(route('com.index'));
     }
 
     /**
@@ -89,5 +88,12 @@ class ChatController extends Controller
     public function destroy(string $id)
     {
         //
+        $chat = Content::find($id);
+        foreach ($chat->response ??[]as $value) {
+            $value->delete();
+        }
+        $chat->delete();
+
+        return redirect(route('com.index'));
     }
 }
