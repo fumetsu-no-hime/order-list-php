@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/front', [FrontController::class, 'index']);
 
 Route::middleware('auth')->prefix('/product')->group(function () {
     Route::get('/order-list', [ProductController::class, 'index'])->name('product.index');
@@ -59,3 +58,9 @@ Route::middleware('auth')->prefix('/com')->group(function () {
     Route::post('/delete/{id}', [ChatController::class, 'destroy'])->name('com.delete');
     Route::post('/respDelete/{id}', [ChatController::class, 'respDelete'])->name('com.respDelete');
 });
+
+Route::get('/front', [FrontController::class, 'index']);
+Route::middleware('auth')->get('/front/user_info', [FrontController::class, 'user_info'])->name('user.info');
+Route::middleware('auth')->post('/front/user_info_update', [FrontController::class, 'user_info_update'])->name('user.update');
+
+

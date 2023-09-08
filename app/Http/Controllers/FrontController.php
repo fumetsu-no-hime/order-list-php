@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
@@ -13,8 +14,40 @@ class FrontController extends Controller
     public function index()
     {
         //
-        $products = Product::where('status',1)->get();
-        return view ('welcome',compact('products'));
+        $products = Product::where('status', 1)->get();
+        return view('welcome', compact('products'));
+    }
+
+    public function user_info(Request $request)
+    {
+        //
+        $user = $request->user();
+        return view('user_setting', compact('user'));
+
+    }
+
+    public function user_info_update(Request $request)
+    {
+        //
+        $request->validate([
+            'name' => 'required|max:255',
+        ], [
+            'name.required' => '必填',
+            'name.max' => '字數過長',
+        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required|max:255',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect(route('user.info'))->withErrors(['nameError' => '帳號名稱字數過多']);
+        // }
+
+        $user = $request->user();
+        $user->update([
+            'name' => $request->name
+        ]);
+        return redirect(route('user.info'));
     }
 
     /**

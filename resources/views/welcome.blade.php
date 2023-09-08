@@ -67,7 +67,7 @@
             <a href="https://freshcart.codescandy.com/pages/shop-wishlist.html" class="text text-decoration-none">
                 <img src="./img/heart.svg" alt="">
             </a>
-            <img src="./img/person.svg" alt="" class="ps-xl-3">
+            <a href="{{route('user.info')}}"><img src="./img/person.svg" alt="" class="ps-xl-3"></a>
         </div>
         <a href="https://freshcart.codescandy.com/pages/shop-wishlist.html" class="p-xl-4">
             <img src="./img/bag-check.svg" alt="">
@@ -647,7 +647,8 @@
                             <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Pharma &
                                     wellness</a></p>
                             <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Dashboard &
-                                    office</a></p>
+
+                                office</a></p>
                             <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Pet
                                     care</a></p>
                         </div>
