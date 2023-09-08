@@ -82,6 +82,18 @@ class ChatController extends Controller
         return redirect(route('com.index'));
     }
 
+    public function respUpdate(Request $request, string $id)
+    {
+        //
+        $resp = Response::find($id);
+        // dd($request->all());
+        $resp->update([
+            'response' => $request->respEdit,
+        ]);
+
+        return redirect(route('com.index'));
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -89,10 +101,26 @@ class ChatController extends Controller
     {
         //
         $chat = Content::find($id);
-        foreach ($chat->response ??[]as $value) {
-            $value->delete();
-        }
+        // foreach ($chat->response ??[]as $value) {
+        //     $value->delete();
+        // }
         $chat->delete();
+
+        return redirect(route('com.index'));
+    }
+
+    public function respDelete(string $id)
+    {
+        //
+        $resp = Response::find($id);
+
+        // foreach ($chat->response ??[]as $value) {
+        //     $value->delete();
+        // }
+        if ($resp) {
+            // 删除回复
+            $resp->delete();
+        }
 
         return redirect(route('com.index'));
     }

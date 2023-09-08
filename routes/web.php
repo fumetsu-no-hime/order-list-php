@@ -51,10 +51,11 @@ Route::resource('/type', TypeController::class);
 // Route::resource('/com', ChatController::class);
 Route::middleware('auth')->prefix('/com')->group(function () {
     Route::get('/index', [ChatController::class, 'index'])->name('com.index');
-Route::get('/create', [ChatController::class, 'create'])->name('com.create');
-Route::post('/store', [ChatController::class, 'store'])->name('com.store');
-Route::get('/edit/{id}', [ChatController::class, 'edit'])->name('com.edit');
-Route::post('/update/{id}', [ChatController::class, 'update'])->name('com.update');
-Route::post('/delete/{id}', [ChatController::class, 'destroy'])->name('com.delete');
+    Route::post('/create', [ChatController::class, 'create'])->name('com.create');
+    Route::post('/store', [ChatController::class, 'store'])->name('com.store');
+    Route::get('/edit/{id}', [ChatController::class, 'edit'])->name('com.edit');
+    Route::post('/update/{id}', [ChatController::class, 'update'])->name('com.update');
+    Route::post('/respUpdate/{id}', [ChatController::class, 'respUpdate'])->name('com.respUpdate');
+    Route::post('/delete/{id}', [ChatController::class, 'destroy'])->name('com.delete');
+    Route::post('/respDelete/{id}', [ChatController::class, 'respDelete'])->name('com.respDelete');
 });
-
