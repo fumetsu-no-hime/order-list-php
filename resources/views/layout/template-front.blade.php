@@ -7,6 +7,7 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <style>
     .dropdown :hover {
@@ -50,30 +51,48 @@
     <div class="d-xl-flex flex-row mb-3 container ">
         <a href="https://freshcart.codescandy.com/index.html"
             class="p-xl-3 fw-bolder fs-2 text-dark text-decoration-none ">
-            <img src="{{asset('./img/freshcart-logo.svg')}}" alt=""></a>
+            <img src="{{ asset('./img/freshcart-logo.svg') }}" alt=""></a>
         <div class="input-group mb-3 pt-4 w-25">
             <input type="text" class="form-control" placeholder="Search for products"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                <img src="{{asset('./img/search.svg')}}" alt="">
+                <img src="{{ asset('./img/search.svg') }}" alt="">
             </button>
         </div>
         <div class="py-xl-4 ps-xl-2">
             <button class="btn border" type="submit">
-                <img src="{{asset('./img/geo-alt.svg')}}" alt="" class="pe-xl-2">Location
+                <img src="{{ asset('./img/geo-alt.svg') }}" alt="" class="pe-xl-2">Location
             </button>
         </div>
         <div class="pt-xl-4  ms-auto ">
-            <a href="https://freshcart.codescandy.com/pages/shop-wishlist.html" class="text text-decoration-none">
-                <img src="{{asset('./img/heart.svg')}}" alt="">
-            </a>
-            <img src="{{asset('./img/person.svg')}}" alt="" class="ps-xl-3">
+            <div class="d-flex gap-4 align-items-center">
+                @auth
+                    <span class="">
+                        hi,{{ Auth::user()->name }}
+                    </span>
+                    <span>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-secondary">登出</button>
+                        </form>
+                    </span>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}">
+                        hi,訪客點此登入</a>
+                @endguest
+                <a href="https://freshcart.codescandy.com/pages/shop-wishlist.html" class="text text-decoration-none">
+                    <img src="{{ asset('./img/heart.svg') }}" alt="">
+                </a>
+                <a href="{{ route('user.info') }}"><img src="{{ asset('./img/person.svg') }}" alt=""
+                        class=""></a>
+                <a href="{{ route('user.check') }}" class="">
+                    <img src="{{ asset('./img/icon/bag.png') }}" alt="" width="16">
+                </a>
+            </div>
         </div>
-        <a href="https://freshcart.codescandy.com/pages/shop-wishlist.html" class="p-xl-4">
-            <img src="{{('./img/bag-check.svg')}}" alt="">
-        </a>
-
-    </div> <!--標題頂層-->
+    </div>
+    <!--標題頂層-->
     <div class="d-xl-flex flex-row container mb-xxl-5 "> <!--頂層第二列-->
         <div class="dropdown">
             <button class="btn bg-success-subtle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -242,9 +261,10 @@
                                     corner</a></p>
                             <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Pharma &
                                     wellness</a></p>
-                            <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Dashboard &
+                            <p><a class="link-opacity-10-hover col-12 text-decoration-none   "
+                                    href="#">Dashboard &
 
-                                office</a></p>
+                                    office</a></p>
                             <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Pet
                                     care</a></p>
                         </div>

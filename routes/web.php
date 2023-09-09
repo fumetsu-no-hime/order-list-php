@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
@@ -18,9 +19,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome2');
-});
+// Route::get('/', function () {
+//     return view('checkout.front');
+// });
+
+Route::get('/', [FrontController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -60,7 +63,17 @@ Route::middleware('auth')->prefix('/com')->group(function () {
 });
 
 Route::get('/front', [FrontController::class, 'index']);
-Route::middleware('auth')->get('/front/user_info', [FrontController::class, 'user_info'])->name('user.info');
-Route::middleware('auth')->post('/front/user_info_update', [FrontController::class, 'user_info_update'])->name('user.update');
+Route::middleware('auth')->prefix('/front')->group(function () {
+    Route::middleware('auth')->get('/user_info', [FrontController::class, 'user_info'])->name('user.info');
+    Route::middleware('auth')->post('/user_info_update', [FrontController::class, 'user_info_update'])->name('user.update');
+    Route::middleware('auth')->get('/user_check', [CheckoutController::class, 'check'])->name('user.check');
+    Route::middleware('auth')->get('/user_del_info', [CheckoutController::class, 'del_info'])->name('user.del');
+    Route::middleware('auth')->get('/user_pay_info', [CheckoutController::class, 'pay_info'])->name('user.pay');
+    Route::middleware('auth')->get('/user_thx', [CheckoutController::class, 'thx'])->name('user.thx');
+});
+
+Route::get('/test', [FrontController::class, 'test'])->name('test.step1');
+Route::get('/test/2', [FrontController::class, 'step2'])->name('test.step2');
+Route::post('/test/store', [FrontController::class, 'step1_store'])->name('test.step1Store');
 
 

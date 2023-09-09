@@ -148,23 +148,23 @@
         });
 
         //寫法二
-        function deleteData(id) {
-            console.log(id);
-            const formData = new formData();
-            formData.append('_token', '{{ csrf_token() }}')
-            formData.append('_method', 'delete');
-            fetch(`/type/${id}` {
-                methods: 'post',
-                body: formData,
-            }).then((res) => {
-                return res.text();
-            }).then((data) => {
-                if (data == 'success') {
-                    const tr = document.querySelector(`tr#dataCol${id}`);
-                    tr.remove();
-                }
-            })
-        }
+        // function deleteData(id) {
+        //     console.log(id);
+        //     const formData = new formData();
+        //     formData.append('_token', '{{ csrf_token() }}')
+        //     formData.append('_method', 'delete');
+        //     fetch(`/type/${id}` {
+        //         methods: 'post',
+        //         body: formData,
+        //     }).then((res) => {
+        //         return res.text();
+        //     }).then((data) => {
+        //         if (data == 'success') {
+        //             const tr = document.querySelector(`tr#dataCol${id}`);
+        //             tr.remove();
+        //         }
+        //     })
+        // }
         // setTimeout(() => {
         //     const test = document.querySelectorAll('.myform');
         //     test.forEach(element => {

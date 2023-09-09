@@ -15,7 +15,7 @@ class FrontController extends Controller
     {
         //
         $products = Product::where('status', 1)->get();
-        return view('welcome', compact('products'));
+        return view('/checkout/front', compact('products'));
     }
 
     public function user_info(Request $request)
@@ -48,6 +48,30 @@ class FrontController extends Controller
             'name' => $request->name
         ]);
         return redirect(route('user.info'));
+    }
+
+    public function test(Request $request)
+    {
+        //
+        $phone = $request->session()->get('form_phone', '');
+        return view('test.test',compact('phone'));
+    }
+
+    public function step1_store(Request $request)
+    {
+        //
+        $request->validate([
+            'phone'=>'required',
+        ]);
+        $request->session()->put('form_phone', $request->phone);
+        return redirect(route('test.step2'));
+    }
+
+    public function step2(Request $request)
+    {
+        //
+        $phone = $request->session()->get('form_phone', '');
+        return view('test.test2',compact('phone'));
     }
 
     /**

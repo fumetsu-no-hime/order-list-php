@@ -2,7 +2,7 @@
 @section('main')
     <main>
         <div class="container d-flex flex-column gap-4">
-            <span>留言板</span>
+            <h4 class="px-2 pt-2 m-0">留言板</h4>
             <div class="content p-2">
                 @foreach ($chats as $chat)
                     {{-- @dd($chat) --}}
@@ -11,7 +11,7 @@
                         <div class="d-flex flex-row gap-3 align-items-center">
                             {{-- @dd($chat->id) --}}
                             <div class="d-flex flex-row align-items-center gap-2 w-100">
-                                <span class="me-auto">{{ $chat->id }}.&nbsp;{{ $chat->content }}</span>
+                                <span class="me-auto">第{{ $chat->id }}樓&nbsp;&nbsp;:&nbsp;&nbsp;{{ $chat->content }}</span>
                                 <div class="button d-flex gap-2">
                                     <form action="{{ route('com.update', ['id' => $chat->id]) }}" method="post"
                                         class="d-flex gap-2">
@@ -35,11 +35,11 @@
                                 </div>
                             </div>
                         </div>
-                        <span>回覆</span>
+                        <h4>回覆</h4>
                         @foreach ($chat->response as $resp)
                             {{-- <div class="resp"> --}}
                             <div class="d-flex flex-row align-items-center gap-3 mb-1 border-bottom">
-                                <span class="me-auto">&nbsp;{{ $resp->response }}</span>
+                                <span class="me-auto">回覆第{{ $chat->id }}樓&nbsp;&nbsp;:&nbsp;&nbsp;{{ $resp->response }}</span>
                                 <div class="button d-flex gap-2">
                                     <form action="{{ route('com.respUpdate', ['id' => $resp->id]) }}" method="post" class="d-flex gap-2">
                                         @csrf

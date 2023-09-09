@@ -101,9 +101,9 @@ class ChatController extends Controller
     {
         //
         $chat = Content::find($id);
-        // foreach ($chat->response ??[]as $value) {
-        //     $value->delete();
-        // }
+        foreach ($chat->response ??[]as $value) {
+            $value->delete();
+        }
         $chat->delete();
 
         return redirect(route('com.index'));
