@@ -15,7 +15,7 @@ class FrontController extends Controller
     {
         //
         $products = Product::where('status', 1)->get();
-        return view('/checkout/front', compact('products'));
+        return view('/front', compact('products'));
     }
 
     public function user_info(Request $request)

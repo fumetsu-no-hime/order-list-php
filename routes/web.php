@@ -63,13 +63,14 @@ Route::middleware('auth')->prefix('/com')->group(function () {
 });
 
 Route::get('/front', [FrontController::class, 'index']);
+Route::middleware('auth')->get('/front/user_info', [FrontController::class, 'user_info'])->name('user.info');
+Route::middleware('auth')->post('/front/user_info_update', [FrontController::class, 'user_info_update'])->name('user.update');
+
 Route::middleware('auth')->prefix('/front')->group(function () {
-    Route::middleware('auth')->get('/user_info', [FrontController::class, 'user_info'])->name('user.info');
-    Route::middleware('auth')->post('/user_info_update', [FrontController::class, 'user_info_update'])->name('user.update');
-    Route::middleware('auth')->get('/user_check', [CheckoutController::class, 'check'])->name('user.check');
-    Route::middleware('auth')->get('/user_del_info', [CheckoutController::class, 'del_info'])->name('user.del');
-    Route::middleware('auth')->get('/user_pay_info', [CheckoutController::class, 'pay_info'])->name('user.pay');
-    Route::middleware('auth')->get('/user_thx', [CheckoutController::class, 'thx'])->name('user.thx');
+    Route::get('/user_check', [CheckoutController::class, 'check'])->name('user.check');
+    Route::get('/user_del_info', [CheckoutController::class, 'del_info'])->name('user.del');
+    Route::get('/user_pay_info', [CheckoutController::class, 'pay_info'])->name('user.pay');
+    Route::get('/user_thx', [CheckoutController::class, 'thx'])->name('user.thx');
 });
 
 Route::get('/test', [FrontController::class, 'test'])->name('test.step1');
