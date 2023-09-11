@@ -11,29 +11,53 @@
     <link rel="stylesheet" href="{{ asset('./css/bootstrap.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .pagination {
+            justify-content: center;
+            align-items: center
+        }
+    </style>
 </head>
 
 <body>
     <div class="position-absolute d-xl-block d-none" id="menuL">
         <div
             class="top-title fw-bolder text-center w-100 sticky-top d-flex justify-content-start p-3 align-items-center">
-            <a href="https://freshcart.codescandy.com/index.html">
+            <a href="{{ route('front.index') }}">
                 <div id="menuL-logo"></div>
             </a>
         </div>
         <div class="side-nav w-100 px-3">
-            <button class=" text-start px-3 py-3 w-100" type="button">
-                <i class="bi bi-house"></i><span class="ms-3">Dashboards</span>
-            </button>
+            <a @if (Route::currentRouteName() == 'backend.index') class="nav-link active"
+            @else
+                class="nav-link" @endif
+                href="{{ route('backend.index') }}">
+                <button class=" text-start px-3 py-3 w-100" type="button">
+                    <i class="bi bi-house"></i><span class="ms-3">Dashboards</span>
+                </button>
+            </a>
             <div class=" text-start px-3 py-xl-3 menuL-title"><span>Store Managements</span></div>
 
-            <button class=" text-start px-3 py-3 w-100" type="button">
-                <i class="bi bi-cart"></i><span class="ms-3">Products</span>
-            </button>
+            <a @if (Route::currentRouteName() == 'product.index') class="nav-link active"
+            @else
+                class="nav-link" @endif
+                href="{{ route('product.index') }}">
+                <button class=" text-start px-3 py-3 w-100 nav-link active" type="button">
+                    <i class="bi bi-cart"></i><span class="ms-3">Products</span>
+                </button>
+            </a>
 
-            <button class=" text-start px-3 py-3 w-100" type="button">
-                <i class="bi bi-list-task"></i><span class="ms-3">Categories</span>
-            </button>
+            <a
+            @if (Route::currentRouteName() == 'type.index')
+                class="nav-link active"
+            @else
+                class="nav-link"
+            @endif
+                href="{{ route('type.index') }}">
+                <button class=" text-start px-3 py-3 w-100" type="button">
+                    <i class="bi bi-cart"></i><span class="ms-3">Type</span>
+                </button>
+            </a>
 
             <button class=" text-start px-3 py-3 w-100 orders" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarToggleExternalContent5" aria-controls="navbarToggleExternalContent5"
@@ -58,18 +82,6 @@
                     </button>
                 </div>
             </div>
-
-            <button class=" text-start px-3 py-3 w-100" type="button">
-                <i class="bi bi-shop"></i><span class="ms-3">Sellers / Vendors</span>
-            </button>
-
-            <button class=" text-start px-3 py-3 w-100" type="button">
-                <i class="bi bi-people"></i><span class="ms-3">Customers</span>
-            </button>
-
-            <button class=" text-start px-3 py-3 w-100" type="button">
-                <i class="bi bi-star"></i><span class="ms-3">Reviews</span>
-            </button>
 
             <button class=" text-start px-3 py-3 w-100" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarToggleExternalContent20" aria-controls="navbarToggleExternalContent20"
@@ -172,40 +184,6 @@
             <div class=" text-start px-3 py-3 text-body-tertiary">
                 <i class="bi bi-gear"></i>
                 <span class="ms-3">Store Settings</span>
-            </div>
-
-            <div class=" text-start px-3 py-xl-3 menuL-title">
-                <span>Support</span>
-                <span class="badge bg-primary-subtle text-primary-emphasis ms-4">Coming Soon</span>
-            </div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary">
-                <i class="bi bi-headphones"></i>
-                <span class="ms-3">Support Ticket</span>
-            </div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary">
-                <i class="bi bi-question-circle"></i>
-                <span class="ms-3">Help Center</span>
-            </div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary">
-                <i class="bi bi-infinity"></i>
-                <span class="ms-3">How FreshCart Works</span>
-            </div>
-
-            <div class=" text-start px-3 py-xl-3 menuL-title">
-                <span>Our Apps</span>
-            </div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary">
-                <i class="bi bi-apple"></i>
-                <span class="ms-3">Apple Store</span>
-            </div>
-
-            <div class=" text-start px-3 py-3 mb-4 text-body-tertiary">
-                <i class="bi bi-google-play"></i>
-                <span class="ms-3">Google Play Store</span>
             </div>
         </div>
     </div>

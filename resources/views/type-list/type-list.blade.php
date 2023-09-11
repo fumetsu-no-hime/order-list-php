@@ -14,7 +14,7 @@
                 <div class="card p-0 border-0 o-card">
                     <div
                         class="card-header bg-white d-flex justify-content-between flex-column flex-md-row order-search py-4">
-                        <form action="{{route('product.index')}}" class="d-flex position-relative" method="GET">
+                        <form action="{{ route('product.index') }}" class="d-flex position-relative" method="GET">
                             <input class="form-control rounded-0 py-0 w-100" name="keyword" id="search-area" type="search"
                                 placeholder="搜尋名稱或描述" aria-label="Search">
                             <a href="{{ route('type.create') }}"
@@ -88,11 +88,10 @@
                                                     class="bg-primary-subtle mb-1 btn">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="del-btn">Delete</button>
+                                                    <button type="submit" class="del-btn btn btn-danger">Delete</button>
                                                 </form>
-                                                <a href="{{ route('type.edit', ['type' => $type->id]) }}"
-                                                    class="bg-primary-subtle btn btn">
-                                                    <span>Edit</span>
+                                                <a href="{{ route('type.edit', ['type' => $type->id]) }}">
+                                                    <button type="button" class="del-btn btn btn-primary">Edit</button>
                                                 </a>
                                             </ul>
                                         </th>

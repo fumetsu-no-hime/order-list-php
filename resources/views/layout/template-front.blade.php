@@ -8,42 +8,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    @yield('head')
+    <style>
+        .dropdown :hover {
+            color: #3ae65d;
+            display: block;
+        }
+
+        .footer {
+            width: 100%;
+            background-color: #F0F3F2;
+        }
+
+        .card-w {
+            width: 300px;
+        }
+
+        a {
+            color: black;
+        }
+
+        a:hover {
+            color: #3ae65d;
+        }
+
+        .btx {
+            width: 50px;
+            height: 50px;
+
+        }
+
+        .circle {
+            width: 10px !important;
+            height: 10px !important;
+            border-radius: 50%;
+        }
+    </style>
 </head>
-<style>
-    .dropdown :hover {
-        color: #3ae65d;
-        display: block;
-    }
-
-    .footer {
-        width: 100%;
-        background-color: #F0F3F2;
-    }
-
-    .card-w {
-        width: 300px;
-    }
-
-    a {
-        color: black;
-    }
-
-    a:hover {
-        color: #3ae65d;
-    }
-
-    .btx {
-        width: 50px;
-        height: 50px;
-
-    }
-
-    .circle {
-        width: 10px !important;
-        height: 10px !important;
-        border-radius: 50%;
-    }
-</style>
 
 <body>
 
@@ -81,7 +82,7 @@
                     <a href="{{ route('login') }}">
                         hi,訪客點此登入</a>
                 @endguest
-                <a href="https://freshcart.codescandy.com/pages/shop-wishlist.html" class="text text-decoration-none">
+                <a href="{{ route('product.index') }}" class="text text-decoration-none">
                     <img src="{{ asset('./img/heart.svg') }}" alt="">
                 </a>
                 <a href="{{ route('user.info') }}"><img src="{{ asset('./img/person.svg') }}" alt=""
@@ -96,7 +97,7 @@
     <div class="d-xl-flex flex-row container mb-xxl-5 "> <!--頂層第二列-->
         <div class="dropdown">
             <button class="btn bg-success-subtle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="./img/list.svg" alt="" class="p-xl-1">All Departments
+                <img src="{{asset('./img/list.svg')}}" alt="" class="p-xl-1">All Departments
             </button>
             <ul class="dropdown-menu dropdown-menu-dark">
                 <li><a class="dropdown-item active" href="#">Action</a></li>
@@ -108,104 +109,11 @@
                 <li><a class="dropdown-item" href="#">Separated link</a></li>
             </ul>
         </div>
-        <div class="ps-xl-2  d-block"> <!--第二列選單一-->
-            <div class="dropdown ps-xl-3 ">
-                <a class="btn  dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Dashboard
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="ps-xl-2 "><!--第二列選單二-->
-            <div class="dropdown ps-xl-3 ">
-                <a class="btn  dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    shop
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="ps-xl-2">
-            <div class="dropdown "><!--第二列選單三-->
-                <a class="btn  dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    stores
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="ps-xl-2 ">
-            <div class="dropdown ps-xl-3 "><!--第二列選單四-->
-                <a class="btn  dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Mega menu
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="ps-xl-2"><!--第二列選單五-->
-            <div class="dropdown ps-xl-3 ">
-                <a class="btn  dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Pages
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="ps-xl-2"><!--第二列選單六-->
-            <div class="dropdown ps-xl-3 ">
-                <a class="btn  dropdown-toggle fw-bolder" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Account
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="ps-xl-2"><!--第二列選單七-->
-            <div class="dropdown text-xl- ">
-                <a class="btn fw-bolder " href="https://freshcart.codescandy.com/dashboard/index.html"
-                    role="button">
-                    dashboard
-                </a>
-
-            </div>
-        </div>
         <div class="ps-xl-2"><!--第二列選單八-->
             <div class="dropdown ps-xl-3 ">
-                <a class="btn   fw-bolder" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Docs
+                <a class="btn fw-bolder" href="{{ route('front.product') }}" aria-expanded="false">
+                    product
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
             </div>
         </div>
     </div>
@@ -219,11 +127,11 @@
                             Categouries
                         </div>
                         <div class="col-6">
-                            <p><a class="link-opacity-10-hover col-12 text-decoration-none   "
-                                    href="#">Vegetables & Fruits</a>
+                            <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Vegetables
+                                    & Fruits</a>
                             </p>
-                            <p><a class="link-opacity-10-hover col-12 text-decoration-none   "
-                                    href="#">Breakfast & instant
+                            <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Breakfast
+                                    & instant
                                     food</a>
                             </p>
                             <p><a class="link-opacity-10-hover col-12 text-decoration-none   " href="#">Bakery &
@@ -353,19 +261,19 @@
                         <div class="p-2">
                             <div class="row">
                                 <div class="col">
-                                    <img src="./img/amazonpay.svg" alt="">
+                                    <img src="{{asset('./img/amazonpay.svg')}}" alt="">
                                 </div>
                                 <div class="col">
-                                    <img src="./img/american-express.svg" alt="">
+                                    <img src="{{asset('./img/american-express.svg')}}" alt="">
                                 </div>
                                 <div class="col">
-                                    <img src="./img/mastercard.svg" alt="">
+                                    <img src="{{asset('./img/mastercard.svg')}}" alt="">
                                 </div>
                                 <div class="col">
-                                    <img src="./img/paypal.svg" alt="">
+                                    <img src="{{asset('./img/paypal.svg')}}" alt="">
                                 </div>
                                 <div class="col">
-                                    <img src="./img/visa.svg" alt="">
+                                    <img src="{{asset('./img/visa.svg')}}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -373,10 +281,10 @@
                             <div class="row">
                                 <div class="col-xl-4  text-end  w-50">Get deliveries with FreshCart</div>
                                 <div class="col-xl-4 w-25 ">
-                                    <img src="./img/appstore-btn.svg" alt="">
+                                    <img src="{{asset('./img/appstore-btn.svg')}}" alt="">
                                 </div>
                                 <div class="col-xl-4 w-25">
-                                    <img src="./img/googleplay-btn.svg" alt="">
+                                    <img src="{{asset('./img/googleplay-btn.svg')}}" alt="">
                                 </div>
                             </div>
                         </div>

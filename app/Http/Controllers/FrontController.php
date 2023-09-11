@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -54,14 +55,14 @@ class FrontController extends Controller
     {
         //
         $phone = $request->session()->get('form_phone', '');
-        return view('test.test',compact('phone'));
+        return view('test.test', compact('phone'));
     }
 
     public function step1_store(Request $request)
     {
         //
         $request->validate([
-            'phone'=>'required',
+            'phone' => 'required',
         ]);
         $request->session()->put('form_phone', $request->phone);
         return redirect(route('test.step2'));
@@ -71,7 +72,40 @@ class FrontController extends Controller
     {
         //
         $phone = $request->session()->get('form_phone', '');
-        return view('test.test2',compact('phone'));
+        return view('test.test2', compact('phone'));
+    }
+
+    public function product(Request $request)
+    {
+        //
+        $products = Product::where('status', 1)->get();
+        return view('frontproduct', compact('products'));
+    }
+
+    public function add_cart(Request $request)
+    {
+        $request->validate([
+            'qty' => 'required|min:1|numeric',
+            'product_id' => 'required|exists:products,id|numeric',
+        ]);
+
+        $oddCart = Cart::where('user_id', $request->user()->id)->where('product_id', $request->product_id)->first();
+        if ($oddCart) {
+            $cart = $oddCart->update([
+                'qty' => $oddCart->qty + $request->qty,
+            ]);
+        } else {
+            $cart = Cart::create([
+                'product_id' => $request->product_id,
+                'qty' => $request->qty,
+                'user_id' => $request->user()->id,
+            ]);
+        }
+
+        return (object) [
+            'code' => $cart ? 1 : 0,
+            'product_id' => $request->product_id,
+        ];
     }
 
     /**
