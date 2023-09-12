@@ -65,8 +65,12 @@
                                     <button type="button" class="controlBtn minus"
                                         onclick="minus({{ $product->id }})">-</button>
                                 </div>
-                                <button type="button" class="btn btn-primary"
-                                    onclick="addCart({{ $product->id }})">加入購物車</button>
+                                @if (Auth::check())
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="addCart({{ $product->id }})">加入購物車</button>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-primary d-flex align-items-center">加入購物車</a>
+                                @endif
                             </div>
                         </div>
                     </div>

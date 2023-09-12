@@ -92,7 +92,7 @@ class FrontController extends Controller
         $oddCart = Cart::where('user_id', $request->user()->id)->where('product_id', $request->product_id)->first();
         if ($oddCart) {
             $cart = $oddCart->update([
-                'qty' => $oddCart->qty + $request->qty,
+                'qty' => $request->qty,
             ]);
         } else {
             $cart = Cart::create([
