@@ -18,43 +18,40 @@
 
         {{-- 付款資訊 --}}
         <h4><i class="fa-light fa-location-dot px-3" style="color: #5c6c75;"></i>付款資訊</h4>
-        <div>
+        <form action="" method="POST">
+            @csrf
+            <div>
+                <label class="border rounded p-3 w-100" for="payment-1">
+                    <input type="radio" name="payment" value="1" id="payment-1">
+                    <span>臨櫃匯款</span>
+                    <div class="ps-3 text-muted">
+                        <p>0000-123456789-123456</p>
+                        <p>007-第一銀行</p>
+                        <p>戶名:洪勝雅</p>
+                        <p>匯款後請聯繫洪先生(0987877810)</p>
+                        <p>請告知帳號末五碼以便對帳</p>
+                    </div>
+                </label>
+                <hr>
+                <hr>
+                {{-- <div class=""> --}}
+                <label class="border rounded p-3 w-100" for="payment-2">
+                    <input type="radio" name="payment" value="2" id="payment-2">
+                    <span>線上付款</span>
+                    <div class="ps-3 text-muted">本站線上付款為綠界金流</div>
+                </label>
+                {{-- </div> --}}
+            </div>
+            {{-- 按鈕 --}}
+            <div class="d-flex justify-content-between py-3">
+                <a href="{{ route('user.del') }}">
+                    <button type="button" class="btn btn-success">Back</button>
+                </a>
+                <a href="{{ route('user.thx') }}">
+                    <button type="button" class="btn btn-success">Next</button>
+                </a>
+            </div>
+        </form>
 
-            <label class="border rounded p-3 w-100" for="payment-1">
-                <input type="radio" name="payment" id="payment-1">
-                <span>臨櫃匯款</span>
-                <div class="ps-3 text-muted">
-                    <p>0000-123456789-123456</p>
-                    <p>007-第一銀行</p>
-                    <p>戶名:洪勝雅</p>
-                    <p>匯款後請聯繫洪先生(0987877810)</p>
-                    <p>請告知帳號末五碼以便對帳</p>
-                </div>
-            </label>
-
-            <hr>
-            <hr>
-
-            {{-- <div class=""> --}}
-
-            <label class="border rounded p-3 w-100" for="payment-2">
-                <input type="radio" name="payment" id="payment-2">
-                <span>線上付款</span>
-                <div class="ps-3 text-muted">本站線上付款為綠界金流</div>
-            </label>
-            {{-- </div> --}}
-
-        </div>
-
-        {{-- 按鈕 --}}
-        <div class="d-flex justify-content-between py-3">
-            <a href="{{ route('user.del') }}">
-                <button type="button" class="btn btn-success">Back</button>
-            </a>
-
-            <a href="{{ route('user.thx') }}">
-                <button type="button" class="btn btn-success">Next</button>
-            </a>
-        </div>
     </main>
 @endsection
