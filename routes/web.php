@@ -66,6 +66,7 @@ require __DIR__ . '/auth.php';
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::prefix('/front')->group(function () {
         Route::get('/user_check', [CheckoutController::class, 'check'])->name('user.check');
+        Route::put('/products/cart-update', [CheckoutController::class, 'cart_update'])->name('cart.update');
         Route::get('/user_del_info', [CheckoutController::class, 'del_info'])->name('user.del');
         Route::get('/user_pay_info', [CheckoutController::class, 'pay_info'])->name('user.pay');
         Route::get('/user_thx', [CheckoutController::class, 'thx'])->name('user.thx');
@@ -82,8 +83,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::post('/respDelete/{id}', [ChatController::class, 'respDelete'])->name('com.respDelete');
     });
 
-    Route::post('/products/add-carts',[FrontController::class,'add_cart'])->name('front.addCart');
+    Route::post('/products/add-carts', [FrontController::class, 'add_cart'])->name('front.addCart');
 });
-
-
-

@@ -69,7 +69,7 @@
             </div>
             <div class="order-details-body">
                 @php
-                    $totalAmount = 0;
+                    $total = 0;
                 @endphp
                 @foreach ($carts ?? [] as $item)
                     <div class="p-3 d-flex justify-content-between align-items-center border">
@@ -83,28 +83,27 @@
                         <div class="btns">
                             <button type="button" class="controlBtn plus" onclick="plus({{ $item->id }})">+</button>
                             <input id="product{{ $item->id }}" type="number" value="{{ $item->qty }}"
-                                onchange="updateQtyTotal(this, {{ $item->product->price }})">
+                                onchange="checkQty(id)">
                             <button type="button" class="controlBtn minus" onclick="minus({{ $item->id }})">-</button>
                         </div>
-                        <div>${{ $item->product->price * $item->qty }}</div>
+                        <div id="price{{ $item->id }}">${{ $item->product->price * $item->qty }}</div>
                     </div>
-                    @php
-                        $totalAmount += $item->product->price * $item->qty;
-                    @endphp
                 @endforeach
             </div>
             <div class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
                 <div>Subtotal</div>
-                <div>${{ $totalAmount }}</div>
+                <div id="total">${{ $total }}</div>
             </div>
         </div>
         <input id="addCartRoute" type="hidden" value="{{ route('front.addCart') }}">
         {{-- 按鈕 --}}
-        <div class="d-flex justify-content-end py-3">
-            <a href="{{ route('user.del') }}">
-                <button type="button" class="btn btn-success">Next</button>
-            </a>
-        </div>
+        @if ($carts->count())
+            <div class="d-flex justify-content-end py-3">
+                <a href="{{ route('user.del') }}">
+                    <button type="button" class="btn btn-success">Next</button>
+                </a>
+            </div>
+        @endif
     </main>
 @endsection
 @section('js')
@@ -116,41 +115,48 @@
             const input = document.querySelector(`input#product${id}`);
             if (input.value == '1') return;
             input.value--;
-            const formData = new FormData();
-            formData.append('_token', '{{ csrf_token() }}');
-            formData.append('qty', input.value);
-            formData.append('product_id', id);
-            fetch(addCartRoute, {
-                method: 'POST',
-                body: formData,
-            }).then((res) => {
-                return res.json();
-            }).then((data) => {
-                // console.log(data);
-            });
+            fetchQty(id, input.value);
         }
 
         function plus(id) {
             const input = document.querySelector(`input#product${id}`);
             input.value++;
+            fetchQty(id, input.value);
+        }
+
+        //id = cart_id qty = 商品數量
+        function fetchQty(id, qty) {
             const formData = new FormData();
             formData.append('_token', '{{ csrf_token() }}');
-            formData.append('qty', input.value);
-            formData.append('product_id', id);
-            fetch(addCartRoute, {
+            formData.append('_method', 'put');
+            formData.append('qty', qty);
+            formData.append('cart_id', id);
+            fetch('{{ route('cart.update') }}', {
                 method: 'POST',
                 body: formData,
             }).then((res) => {
                 return res.json();
             }).then((data) => {
-                // console.log(data);
+                const price = document.querySelector(`#price${id}`);
+                const totalEl = document.querySelector('#total');
+                price.textContent = '$' + `${data.price}`;
+
+                const totalPrice = document.querySelectorAll(`[id^=price]`);
+                let total = 0;
+                totalPrice.forEach(element => {
+                    const price = parseInt(element.textContent.substring(1));
+                    total += price;
+                    totalEl.textContent = '$' + total;
+                });
             });
         }
 
-        function checkQty(el) {
-            if (el.value <= 0) {
-                el.value == 1
+        function checkQty(id) {
+            const input = document.querySelector(`input#product${id}`);
+            if (input.value <= 0) {
+                input.value == 1
             }
+            fetchQty(id, qty);
         }
     </script>
 @endsection

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('date')->nullable()->comment('日期');
             $table->integer('phone')->nullable()->comment('收件者電話');
             $table->text('desc')->nullable()->default('')->comment('備註');
+            $table->string('number')->nullable()->default('')->comment('訂單編號');
         });
     }
 
