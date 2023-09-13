@@ -11,7 +11,7 @@ class OrderProduct extends Model
 
     protected $table = 'order_infos';
 
-    protected $fillable = ['img_path','product_name','desc','qty','price'];
+    protected $fillable = ['img_path','product_name','desc','qty','price','form_id'];
 
     public function order(){
         return $this->belongsTo(Order::class, 'user_id','id');

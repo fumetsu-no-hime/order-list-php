@@ -13,6 +13,6 @@ class Order extends Model
     protected $fillable = ['user_id','name','address','date','phone','memo','number','payment','subtotal'];
 
     public function orderProduct(){
-        return $this->hasMany(OrderProduct::class, 'user_id','id');
+        return $this->hasMany(OrderProduct::class,'id', 'user_id');
     }
 }

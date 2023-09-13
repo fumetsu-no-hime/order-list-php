@@ -25,7 +25,7 @@
                 <input type="date" class="form-control" id="date" placeholder="">
             </div>
             <div class="input-group mb-2">
-                <input type="text" class="form-control" placeholder="收貨者連絡電話" aria-label="Recipient's username"
+                <input type="tel" class="form-control" placeholder="收貨者連絡電話" aria-label="Recipient's username"
                     aria-describedby="basic-addon2">
             </div>
             <div class="input-group">

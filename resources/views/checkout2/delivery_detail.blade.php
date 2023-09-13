@@ -24,24 +24,24 @@
                 <div class="border rounded p-3">
                     <div class="mb-3">
                         <input type="text" name="name" placeholder="收件者姓名" class="form-control"
-                            aria-label="Sizing example input" value="{{ $delName }}" required>
+                            aria-label="Sizing example input" value="{{ old('name', $delName ?? '') }}" required>
                     </div>
                     <div class="mb-3">
                         <input type="text" name="add" placeholder="收件者地址" class="form-control"
-                            aria-label="Sizing example input" value="{{ $delAdd }}" required>
+                            aria-label="Sizing example input" value="{{ old('add', $delAdd ?? '') }}" required>
                     </div>
                     <div class="mb-3">
-                        <input type="date" name="date" placeholder="年/月/日" class="form-control"
-                            aria-label="Sizing example input" value="{{ $delDate }}" required>
+                        <input type="date" name="date" min="{{substr(today(),0,10)}}" placeholder="年/月/日" class="form-control"
+                            aria-label="Sizing example input" value="{{ old('date', $delDate ?? '') }}" required>
                     </div>
                     <div class="mb-3">
-                        <input type="number" name="phone" placeholder="收件者聯絡電話" class="form-control"
-                            aria-label="Sizing example input" value="{{ $delPhone }}"
-                            oninput="if(value.length>10)value=value.slice(0,10)" required>
+                        <input type="tel" name="phone" placeholder="收件者聯絡電話" class="form-control"
+                            aria-label="Sizing example input" value="{{ old('phone', $delPhone ?? '') }}"
+                            oninput="if(value.length>10)value=value.slice(0,10)" pattern="09\d{2}\-?\d{3}\-?\d{3}" required>
                     </div>
                     <div class="mb-3">
                         <input type="text" name="memo" placeholder="備註" class="form-control"
-                            aria-label="Sizing example input" value="{{ $delMemo }}">
+                            aria-label="Sizing example input" value="{{ old('memo', $delMemo ?? '') }}">
                     </div>
                 </div>
             </div>

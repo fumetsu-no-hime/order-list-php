@@ -66,9 +66,11 @@ require __DIR__ . '/auth.php';
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::prefix('/front')->group(function () {
         Route::get('/user_check', [CheckoutController::class, 'check'])->name('user.check');
+        Route::get('/order_detail', [CheckoutController::class, 'detail'])->name('user.detail');
         Route::put('/products/cart-update', [CheckoutController::class, 'cart_update'])->name('cart.update');
         Route::post('/user_del_store', [CheckoutController::class, 'del_store'])->name('del.store');
         Route::post('/order', [CheckoutController::class, 'order'])->name('order.store');
+        Route::delete('/order-delete', [CheckoutController::class, 'delete'])->name('order.delete');
         Route::get('/user_del_info', [CheckoutController::class, 'del_info'])->name('user.del');
         Route::get('/user_pay_info', [CheckoutController::class, 'pay_info'])->name('user.pay');
         Route::get('/user_thx', [CheckoutController::class, 'thx'])->name('user.thx');

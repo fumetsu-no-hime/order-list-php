@@ -68,14 +68,14 @@
                 <div class="p-3">Order Details</div>
             </div>
             <div class="order-details-body">
-                @foreach ($carts ?? [] as $item)
+                @foreach ($order ?? [] as $item)
                     <div id="row{{ $item->id }}" class="p-3 d-flex justify-content-between align-items-center border">
                         <div>
-                            <img style="width:150px;" src="{{ asset($item->product->img_path) }}" alt="">
+                            <img style="width:150px;" src="{{ asset($item->orderProduct->img_path) }}" alt="">
                         </div>
                         <div>
-                            <div class="product-name">品名 : {{ $item->product->name }}</div>
-                            <div class="product-desc text-muted">{{ $item->product->desc }}</div>
+                            <div class="product-name">品名 : {{ $item->orderProduct->name }}</div>
+                            <div class="product-desc text-muted">{{ $item->orderProduct->desc }}</div>
                         </div>
                         <div class="btns">
                             <button type="button" class="controlBtn plus" onclick="plus({{ $item->id }})">+</button>
@@ -83,7 +83,7 @@
                                 onchange="checkQty({{ $item->id }})" required>
                             <button type="button" class="controlBtn minus" onclick="minus({{ $item->id }})">-</button>
                         </div>
-                        <div id="price{{ $item->id }}">${{ $item->product->price * $item->qty }}</div>
+                        <div id="price{{ $item->id }}">${{ $item->orderProduct->price * $item->qty }}</div>
                         <div>
                             <button type="button" class="btn btn-danger"
                                 onclick="delCart({{ $item->id }})">刪除</button>
@@ -93,7 +93,7 @@
             </div>
             <div class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
                 <div>Subtotal</div>
-                <div id="total">${{ $total }}</div>
+                <div id="total">${{ $item->total }}</div>
             </div>
         </div>
         <input id="addCartRoute" type="hidden" value="{{ route('front.addCart') }}">

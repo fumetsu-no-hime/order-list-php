@@ -18,7 +18,7 @@
 
         {{-- 付款資訊 --}}
         <h4><i class="fa-light fa-location-dot px-3" style="color: #5c6c75;"></i>付款資訊</h4>
-        <form action="" method="POST">
+        <form action="{{ route('order.store') }}" method="POST">
             @csrf
             <div>
                 <label class="border rounded p-3 w-100" for="payment-1">
@@ -47,9 +47,7 @@
                 <a href="{{ route('user.del') }}">
                     <button type="button" class="btn btn-success">Back</button>
                 </a>
-                <a href="{{ route('user.thx') }}">
-                    <button type="button" class="btn btn-success">Next</button>
-                </a>
+                <button type="submit" class="btn btn-success">Next</button>
             </div>
         </form>
 
