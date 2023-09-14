@@ -101,7 +101,7 @@
         <div id="nextBtn" class="d-flex justify-content-end py-3">
             @if ($carts->count())
                 <a href="{{ route('user.del') }}">
-                    <button type="button" class="btn btn-success">Next</button>
+                    <button type="button" class="btn btn-success">下一步</button>
                 </a>
             @endif
         </div>

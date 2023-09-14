@@ -53,6 +53,5 @@
                 <button type="submit" class="btn btn-success">Next</button>
             </div>
         </form>
-
     </main>
 @endsection
