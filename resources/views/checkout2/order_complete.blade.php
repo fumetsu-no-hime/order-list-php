@@ -18,7 +18,7 @@
                 <button type="button" class="btn btn-success">回首頁</button>
             </a>
 
-            <a href="">
+            <a href="{{route('user.detail')}}">
                 <button type="button" class="btn btn-success">查看訂單</button>
             </a>
         </div>

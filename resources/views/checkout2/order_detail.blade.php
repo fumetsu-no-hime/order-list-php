@@ -64,47 +64,54 @@
 
         {{-- 商品列表 --}}
         <div>
-            <div class="order-details-head border rounded-top">
-                <div class="p-3">Order Details</div>
-            </div>
-            <div class="order-details-body">
-                @foreach ($order ?? [] as $item)
-                    <div id="row{{ $item->id }}" class="p-3 d-flex justify-content-between align-items-center border">
-                        <div>
-                            <img style="width:150px;" src="{{ asset($item->orderProduct->img_path) }}" alt="">
-                        </div>
-                        <div>
-                            <div class="product-name">品名 : {{ $item->orderProduct->name }}</div>
-                            <div class="product-desc text-muted">{{ $item->orderProduct->desc }}</div>
-                        </div>
-                        <div class="btns">
-                            <button type="button" class="controlBtn plus" onclick="plus({{ $item->id }})">+</button>
-                            <input id="product{{ $item->id }}" type="number" min="1" value="{{ $item->qty }}"
-                                onchange="checkQty({{ $item->id }})" required>
-                            <button type="button" class="controlBtn minus" onclick="minus({{ $item->id }})">-</button>
-                        </div>
-                        <div id="price{{ $item->id }}">${{ $item->orderProduct->price * $item->qty }}</div>
-                        <div>
-                            <button type="button" class="btn btn-danger"
-                                onclick="delCart({{ $item->id }})">刪除</button>
+            @foreach ($order ?? [] as $key => $item)
+                <div class="order-details-head border rounded-top d-flex justify-content-between">
+                    <div class="p-3">第{{ $key + 1 }}筆訂單資訊</div>
+                    <div class="p-3">{{ $item->created_at->format('Y/m/d') }}</div>
+                </div>
+                {{-- @dd($item->orderProduct) --}}
+                @foreach ($item->orderProduct ?? [] as $product)
+                    <div class="order-details-body">
+                        <div class="p-3 d-flex justify-content-between align-items-center border">
+                            <div>
+                                <img style="width:150px" src="{{ asset($product->img_path) }}" alt="">
+                            </div>
+                            <div>
+                                <div class="product-name">品名 : {{ $product->product_name }}</div>
+                                <div class="product-desc text-muted">{{ $product->desc }}</div>
+                            </div>
+                            <div>{{ $product->qty }}</div>
+                            <div id="price">${{ $product->price * $product->qty }}</div>
                         </div>
                     </div>
                 @endforeach
+                <div class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
+                    <div>收件人 : {{ $item->name }}</div>
+                    <div>地址 : {{ $item->address }}</div>
+                    <div>日期 : {{ $item->date }}</div>
+                    <div>電話 : {{ $item->phone }}</div>
+                    <div>備註 : {{ $item->memo }}</div>
+                </div>
+                <div
+                    class="order-details-footer d-flex justify-content-end align-items-center p-3 border rounded-bottom mb-4">
+                    <div>總金額 : ${{ $item->subtotal }}</div>
+                </div>
+            @endforeach
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('front.index') }}">
+                    <button type="button" class="btn btn-success">回首頁</button>
+                </a>
             </div>
-            <div class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
-                <div>Subtotal</div>
-                <div id="total">${{ $item->total }}</div>
-            </div>
+
         </div>
-        <input id="addCartRoute" type="hidden" value="{{ route('front.addCart') }}">
         {{-- 按鈕 --}}
-        <div id="nextBtn" class="d-flex justify-content-end py-3">
+        {{-- <div id="nextBtn" class="d-flex justify-content-end py-3">
             @if ($carts->count())
                 <a href="{{ route('user.del') }}">
                     <button type="button" class="btn btn-success">Next</button>
                 </a>
             @endif
-        </div>
+        </div> --}}
     </main>
 @endsection
 @section('js')

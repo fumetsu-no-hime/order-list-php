@@ -90,6 +90,9 @@
                 <a href="{{ route('user.check') }}" class="">
                     <img src="{{ asset('./img/icon/bag.png') }}" alt="" width="16">
                 </a>
+                <a href="{{ route('user.detail') }}" class="">
+                    <i class="bi bi-card-list"></i>
+                </a>
             </div>
         </div>
     </div>

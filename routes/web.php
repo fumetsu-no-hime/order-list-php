@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 //登入者
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'role.weight:2'])->prefix('admin')->group(function () {
     Route::prefix('/front')->group(function () {
         Route::get('/user_check', [CheckoutController::class, 'check'])->name('user.check');
         Route::get('/order_detail', [CheckoutController::class, 'detail'])->name('user.detail');
@@ -89,3 +89,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::post('/products/add-carts', [FrontController::class, 'add_cart'])->name('front.addCart');
 });
+
+Route::get('/Ecpay/{order_id}', [FrontController::class, 'ec_pay'])->name('ecpay');
+Route::get('/Ecpay/return_back', [FrontController::class, 'ec_pay_return'])->name('ecpay.return');
+
+

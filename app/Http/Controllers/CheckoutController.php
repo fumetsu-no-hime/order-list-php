@@ -131,15 +131,21 @@ class CheckoutController extends Controller
 
         session()->forget(['del_name','del_add','del_date','del_phone','del_memo']);
 
-        $data = [
-            'name'=>$request->user()->name,
-            'order_id'=> $form->number,
-            'subtotal'=>$total,
-        ];
+        if ($request->pay === 1){
+            return redirect(route('user.thx'));
+        }else{
+            return redirect(route('ecpay',['order_id'=>$form->id]));
+        }
 
-        Mail::to($request->user()->email)->send(new OrderCreated($data));
+        // $data = [
+        //     'name'=>$request->user()->name,
+        //     'order_id'=> $form->number,
+        //     'subtotal'=>$total,
+        // ];
 
-        return redirect(route('user.thx'));
+        // Mail::to($request->user()->email)->send(new OrderCreated($data));
+
+        // return redirect(route('user.thx'));
     }
 
     public function thx(Request $request)
@@ -173,7 +179,7 @@ class CheckoutController extends Controller
     public function detail(Request $request)
     {
         //
-        $order = Order::where('user_id', $request->user()->id)->get();
+        $order = Order::where('user_id', $request->user()->id)->orderby('id','desc')->get();
         return view('checkout2.order_detail',compact('order'));
     }
 }
