@@ -77,15 +77,16 @@
                                 <img style="width:150px" src="{{ asset($product->img_path) }}" alt="">
                             </div>
                             <div>
-                                <div class="product-name">品名 : {{ $product->product_name }}</div>
-                                <div class="product-desc text-muted">{{ $product->desc }}</div>
+                                <div class="product-name">品名:{{ $product->product_name }}</div>
+                                <div class="product-desc text-muted">產品描述:{{ $product->desc }}</div>
                             </div>
-                            <div>{{ $product->qty }}</div>
+                            <div>數量:{{ $product->qty }}</div>
                             <div id="price">${{ $product->price * $product->qty }}</div>
                         </div>
                     </div>
                 @endforeach
-                <div class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
+                <div
+                    class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
                     <div>收件人 : {{ $item->name }}</div>
                     <div>地址 : {{ $item->address }}</div>
                     <div>日期 : {{ $item->date }}</div>
@@ -93,120 +94,46 @@
                     <div>備註 : {{ $item->memo }}</div>
                 </div>
                 <div
-                    class="order-details-footer d-flex justify-content-end align-items-center p-3 border rounded-bottom mb-4">
+                    class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom mb-2">
+                    <div>訂單狀態 :
+                        @if ($item->status == 1)
+                            未繳費
+                        @elseif ($item->status == 2)
+                            已繳費
+                        @elseif ($item->status == 3)
+                            已出貨
+                        @elseif ($item->status == 4)
+                            完成訂單
+                        @else
+                            取消訂單
+                        @endif
+                    </div>
                     <div>總金額 : ${{ $item->subtotal }}</div>
                 </div>
+                <div id="nextBtn" class="d-flex justify-content-end py-3">
+                    @if ($item->status == 1)
+                        <form action="{{ route('order.backToPay') }}" method="POST">
+                            @csrf
+                            <input name="order_id" type="hidden" value="{{ $item->id }}">
+                            <button type="submit" class="btn btn-success">前往繳費</button>
+                        </form>
+                    @endif
+                </div>
             @endforeach
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-center">
                 <a href="{{ route('front.index') }}">
                     <button type="button" class="btn btn-success">回首頁</button>
                 </a>
             </div>
-
         </div>
-        {{-- 按鈕 --}}
-        {{-- <div id="nextBtn" class="d-flex justify-content-end py-3">
-            @if ($carts->count())
-                <a href="{{ route('user.del') }}">
-                    <button type="button" class="btn btn-success">Next</button>
-                </a>
-            @endif
-        </div> --}}
     </main>
 @endsection
-@section('js')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        const addCartRoute = document.querySelector(`input#addCartRoute`).value;
-
-        function minus(id) {
-            const input = document.querySelector(`input#product${id}`);
-            if (input.value == '1') return;
-            input.value--;
-            fetchQty(id, input.value);
-        }
-
-        function plus(id) {
-            const input = document.querySelector(`input#product${id}`);
-            input.value++;
-            fetchQty(id, input.value);
-        }
-
-        //id = cart_id qty = 商品數量
-        function fetchQty(id, qty) {
-            const formData = new FormData();
-            formData.append('_token', '{{ csrf_token() }}');
-            formData.append('_method', 'put');
-            formData.append('qty', qty);
-            formData.append('cart_id', id);
-            fetch('{{ route('cart.update') }}', {
-                method: 'POST',
-                body: formData,
-            }).then((res) => {
-                return res.json();
-            }).then((data) => {
-                const price = document.querySelector(`#price${id}`);
-                const totalEl = document.querySelector('#total');
-                price.textContent = '$' + `${data.price}`;
-
-                const totalPrice = document.querySelectorAll(`[id^=price]`);
-                let total = 0;
-                totalPrice.forEach(element => {
-                    const price = parseInt(element.textContent.substring(1));
-                    total += price;
-                    totalEl.textContent = '$' + total;
-                });
-            });
-        }
-
-        function checkQty(id) {
-            const input = document.querySelector(`input#product${id}`);
-            if (input.value <= 0) {
-                input.value == 1
-            }
-            fetchQty(id, input.value);
-        }
-
-        function delCart(id) {
-            Swal.fire({
-                title: '確定要刪除這個商品嗎?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '刪除'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const formData = new FormData();
-                    formData.append('_token', '{{ csrf_token() }}');
-                    formData.append('_method', 'DELETE');
-                    formData.append('cart_id', id);
-                    fetch('{{ route('order.delete') }}', {
-                        method: 'POST',
-                        body: formData,
-                    }).then((res) => {
-                        return res.json();
-                    }).then((data) => {
-                        console.log(data);
-                        if (data.code === 1) {
-                            const row = document.querySelector(`#row${data.id}`);
-                            const totalEl = document.querySelector('#total');
-                            const nextBtn = document.querySelector('#nextBtn');
-                            row.remove();
-                            const rows = document.querySelectorAll('[id^=row]');
-                            totalEl.textContent = '$' + data.total;
-                            if (rows.length === 0) {
-                                nextBtn.textContent = '';
-                            }
-                            Swal.fire(
-                                '已刪除',
-                            )
-                        } else {
-                            location.reload();
-                        }
-                    });
-                }
-            })
-        }
-    </script>
-@endsection
+@if (Session::has('msg'))
+    @section('js')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire('{{ Session::get('msg') }}')
+        </script>
+    @endsection
+@else
+@endif

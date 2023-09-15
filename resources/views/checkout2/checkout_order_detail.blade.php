@@ -56,7 +56,7 @@
 
         {{-- 標題 --}}
         <div class="title py-4 mb-4 px-2 w-100">
-            <h2 class="fw-medium w-50 bold">Checkout</h2>
+            <h2 class="fw-medium w-50 bold">購物車</h2>
             <div class="text-muted">Already have an account? Click here to
                 <a href="{{ route('login') }}" class="text-success">Sign in</a>.
             </div>

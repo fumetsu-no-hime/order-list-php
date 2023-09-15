@@ -131,7 +131,7 @@ class CheckoutController extends Controller
 
         session()->forget(['del_name','del_add','del_date','del_phone','del_memo']);
 
-        if ($request->pay === 1){
+        if ($request->payment == 1){
             return redirect(route('user.thx'));
         }else{
             return redirect(route('ecpay',['order_id'=>$form->id]));

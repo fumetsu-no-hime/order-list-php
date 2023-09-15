@@ -148,7 +148,7 @@ class FrontController extends Controller
 
             $step4 = strtolower($step3);
 
-            $step5 = hash('sha256',$step4);
+            $step5 = hash('sha256', $step4);
 
             $step6 = strtoupper($step5);
 
@@ -163,6 +163,24 @@ class FrontController extends Controller
     public function ec_pay_return(Request $request)
     {
         //綠界打不回來，因為我們是本地測試伺服器
+    }
+
+    public function back_to_pay(Request $request)
+    {
+        $request->validate([
+            'order_id' => 'required|exists:del_infos,id'
+        ]);
+
+        $user = $request->user();
+
+        $order = Order::where('user_id', $user->id)->find($request->order_id);
+
+        if ($order) {
+            if ($order->status == 1) {
+                return redirect(route('ecpay', ['order_id' => $request->order_id]));
+            }
+        }
+        return redirect(route('user.detail'))->with(['msg' => '訂單不存在']);
     }
 
     /**

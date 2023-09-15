@@ -88,9 +88,8 @@ Route::middleware(['auth', 'role.weight:2'])->prefix('admin')->group(function ()
     });
 
     Route::post('/products/add-carts', [FrontController::class, 'add_cart'])->name('front.addCart');
+    Route::post('/order/back_to_pay', [FrontController::class, 'back_to_pay'])->name('order.backToPay');
 });
 
 Route::get('/Ecpay/{order_id}', [FrontController::class, 'ec_pay'])->name('ecpay');
 Route::get('/Ecpay/return_back', [FrontController::class, 'ec_pay_return'])->name('ecpay.return');
-
-
